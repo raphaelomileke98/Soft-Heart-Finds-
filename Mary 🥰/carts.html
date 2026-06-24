@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width, initial-scale=1">
+
+<title>Cart</title>
+
+<style>
+
+body{
+    font-family:Arial,sans-serif;
+    background:#F4C2C2;
+    padding:20px;
+}
+
+h1{
+    text-align:center;
+}
+
+table{
+    width:100%;
+    background:white;
+    border-collapse:collapse;
+}
+
+th,td{
+    border:1px solid #ddd;
+    padding:10px;
+    text-align:center;
+}
+
+th{
+    background:#ff8fab;
+}
+
+#total{
+    font-size:22px;
+    font-weight:bold;
+    margin-top:20px;
+    text-align:right;
+}
+
+button{
+    width:100%;
+    padding:15px;
+    border:none;
+    background:green;
+    color:white;
+    font-size:18px;
+    margin-top:20px;
+    border-radius:10px;
+}
+
+.remove-btn{
+    background:red;
+    width:auto;
+    padding:6px 10px;
+    font-size:14px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>🛒 Shopping Cart</h1>
+
+<table>
+
+<thead>
+
+<tr>
+<th>Product</th>
+<th>Price</th>
+<th>Qty</th>
+<th>Subtotal</th>
+<th>Action</th>
+</tr>
+
+</thead>
+
+<tbody id="cartTable">
+
+</tbody>
+
+</table>
+
+<div id="total">
+Total: ₦0
+</div>
+
+<button id="orderBtn">
+Order Now via WhatsApp
+</button>
+
+<script>
+
+let cart =
+JSON.parse(localStorage.getItem("cart"))
+|| [];
+
+const table =
+document.getElementById("cartTable");
+
+let grandTotal = 0;
+
+function renderCart(){
+
+table.innerHTML = "";
+
+grandTotal = 0;
+
+cart.forEach((item,index)=>{
+
+const subtotal =
+item.price * item.quantity;
+
+grandTotal += subtotal;
+
+table.innerHTML += `
+<tr>
+
+<td>${item.name}</td>
+
+<td>₦${item.price}</td>
+
+<td>${item.quantity}</td>
+
+<td>₦${subtotal}</td>
+
+<td>
+<button
+class="remove-btn"
+onclick="removeItem(${index})">
+Remove
+</button>
+</td>
+
+</tr>
+`;
+
+});
+
+document.getElementById("total")
+.innerHTML =
+`Total: ₦${grandTotal}`;
+
+}
+
+function removeItem(index){
+
+cart.splice(index,1);
+
+localStorage.setItem(
+"cart",
+JSON.stringify(cart)
+);
+
+renderCart();
+
+}
+
+renderCart();
+
+document.getElementById("orderBtn")
+.onclick = ()=>{
+
+let message =
+"Hello Soft Heart Finds💖,%0A%0AI want to order:%0A";
+
+cart.forEach(item=>{
+
+message +=
+`${item.name} x${item.quantity}
+- ₦${item.price * item.quantity}%0A`;
+
+});
+
+message +=
+`%0ATotal: ₦${grandTotal}`;
+
+window.open(
+"https://wa.me/2348069234948?text="
++ message,
+"_blank"
+);
+
+};
+
+</script>
+
+</body>
+
+</html>

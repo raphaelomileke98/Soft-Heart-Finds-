@@ -1,0 +1,62 @@
+
+body {
+  background-color: lavenderblush;
+  
+}
+#up {
+  display:flex;
+  justify-content: space-between;
+  
+}
+
+.heads {
+  text-align: center;
+}
+
+.btn {
+  padding:18px;
+  background-color: #FB6F92;
+}
+
+.product_name{
+  text-decoration-thickness: bold;
+}
+#logo {
+  display: flex;
+  justify-content: center;
+}
+
+#navi {
+  display:flex;
+  justify-content: space-evenly;
+  margin: 50px;
+  background-color: pink;
+  position:sticky;
+  top: 0;
+}
+
+.storefront {
+  display:flex;
+  justify-content: space-between;
+  
+}
+
+.feature {
+  width:200px;
+  height:200px;
+}
+
+.product {
+  text-align: center;
+  margin: 15px;
+  
+}
+
+.price {
+  font-weight: bold;
+  color:red;
+}
+
+#contact {
+  font-size:1.28em;
+}
